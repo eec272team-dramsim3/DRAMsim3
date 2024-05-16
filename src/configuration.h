@@ -12,6 +12,7 @@ namespace dramsim3 {
 enum class DRAMProtocol {
     DDR3,
     DDR4,
+    DDR5,
     GDDR5,
     GDDR5X,
     GDDR6,
@@ -98,6 +99,20 @@ class Config {
     int t32AW;
     int tRCDRD;
     int tRCDWR;
+
+    // DDR5
+    int tCCD_S_WR;
+    int tCCD_S_WTR;
+    int tCCD_L_WR;
+    int tCCD_L_WTR;
+    int tRFC2;
+    int tRFCsb;
+    int tREFSBRD;
+    int tRFM1;
+    int tRFM2;
+    int tRFMsb;
+    int tDRFMab;
+    int tDRFMsb;
 
     // pre calculated power parameters
     double act_energy_inc;

@@ -64,7 +64,7 @@ void Config::CalculateSize() {
 
 DRAMProtocol Config::GetDRAMProtocol(std::string protocol_str) {
     std::map<std::string, DRAMProtocol> protocol_pairs = {
-        {"DDR3", DRAMProtocol::DDR3},     {"DDR4", DRAMProtocol::DDR4},
+        {"DDR3", DRAMProtocol::DDR3},     {"DDR4", DRAMProtocol::DDR4},    {"DDR5", DRAMProtocol::DDR5},
         {"GDDR5", DRAMProtocol::GDDR5},   {"GDDR5X", DRAMProtocol::GDDR5X},  {"GDDR6", DRAMProtocol::GDDR6},
         {"LPDDR", DRAMProtocol::LPDDR},   {"LPDDR3", DRAMProtocol::LPDDR3},
         {"LPDDR4", DRAMProtocol::LPDDR4}, {"HBM", DRAMProtocol::HBM},
@@ -335,6 +335,21 @@ void Config::InitTimingParams() {
     tRCDWR = GetInteger("timing", "tRCDWR", 20);
 
     ideal_memory_latency = GetInteger("timing", "ideal_memory_latency", 10);
+
+    // DDR5
+    tCCD_S_WR   = GetInteger("timing", "tCCD_S_WR", 8);
+    tCCD_S_WTR  = GetInteger("timing", "tCCD_S_WTR", 34);
+    tCCD_L_WR   = GetInteger("timing", "tCCD_L_WR", 16);
+    tCCD_L_WTR  = GetInteger("timing", "tCCD_L_WTR", 46);
+    // tRFC       = GetInteger("timing", "tRFC1", 8);
+    tRFC2       = GetInteger("timing", "tRFC", 208);
+    tRFCsb      = GetInteger("timing", "tRFCsb", 184);
+    tREFSBRD    = GetInteger("timing", "tREFSBRD", 30);
+    tRFM1       = GetInteger("timing", "tRFM1", 312);
+    tRFM2       = GetInteger("timing", "tRFM2", 208);
+    tRFMsb      = GetInteger("timing", "tRFMsb", 184);
+    tDRFMab     = GetInteger("timing", "tDRFMab", 224);
+    tDRFMsb     = GetInteger("timing", "tDRFMsb", 192);
 
     // calculated timing
     RL = AL + CL;
