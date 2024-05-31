@@ -5,6 +5,7 @@
 using namespace dramsim3;
 
 int main(int argc, const char **argv) {
+    std::cout << "====== I'm in DRAMsim3 now ======" << std::endl;
     args::ArgumentParser parser(
         "DRAM Simulator.",
         "Examples: \n."
