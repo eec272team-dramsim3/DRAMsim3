@@ -161,6 +161,10 @@ class Config {
     // Computed parameters
     int request_size_bytes;
 
+    bool IsDDR5() const {
+        return (protocol == DRAMProtocol::DDR5);
+    }
+
     bool IsGDDR() const {
         return (protocol == DRAMProtocol::GDDR5 ||
                 protocol == DRAMProtocol::GDDR5X ||

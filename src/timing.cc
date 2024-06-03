@@ -15,6 +15,9 @@ Timing::Timing(const Config& config)
     int read_to_read_o = config.burst_cycle + config.tRTRS;
     int read_to_write = config.RL + config.burst_cycle - config.WL +
                         config.tRTRS;
+    // if (config.IsDDR5()){
+    //     read_to_write = config.RL - config.WL + 2 + config.burst_cycle + 2;
+    // }
     int read_to_write_o = config.read_delay + config.burst_cycle +
                           config.tRTRS - config.write_delay;
     int read_to_precharge = config.AL + config.tRTP;
@@ -22,10 +25,19 @@ Timing::Timing(const Config& config)
         config.AL + config.burst_cycle + config.tRTP + config.tRP;
 
     int write_to_read_l = config.write_delay + config.tWTR_L;
+    // if (config.IsDDR5()){
+    //     write_to_read_l = config.tCCD_L_WTR;
+    // }
     int write_to_read_s = config.write_delay + config.tWTR_S;
+    // if (config.IsDDR5()){
+    //     write_to_read_s = config.tCCD_S_WTR;
+    // }
     int write_to_read_o = config.write_delay + config.burst_cycle +
                           config.tRTRS - config.read_delay;
     int write_to_write_l = std::max(config.burst_cycle, config.tCCD_L);
+    if (config.IsDDR5()) {
+        write_to_write_l = std::max(config.burst_cycle, config.tCCD_L_WR);
+    }
     int write_to_write_s = std::max(config.burst_cycle, config.tCCD_S);
     int write_to_write_o = config.burst_cycle;
     int write_to_precharge = config.WL + config.burst_cycle + config.tWR;

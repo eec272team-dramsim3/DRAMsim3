@@ -5,7 +5,6 @@
 using namespace dramsim3;
 
 int main(int argc, const char **argv) {
-    std::cout << "====== I'm in DRAMsim3 now ======" << std::endl;
     args::ArgumentParser parser(
         "DRAM Simulator.",
         "Examples: \n."
@@ -63,7 +62,10 @@ int main(int argc, const char **argv) {
     }
 
     for (uint64_t clk = 0; clk < cycles; clk++) {
-        cpu->ClockTick();
+        bool done = cpu->ClockTick();
+        if (!done) {
+            break;
+        }
     }
     cpu->PrintStats();
 
